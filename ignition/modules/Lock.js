@@ -1,15 +1,11 @@
 const { buildModule } = require("@nomicfoundation/hardhat-ignition/modules");
+const { ATokenEth } = require("../../contracts/ATokenETH.sol");
 
-const JAN_1ST_2030 = 1893456000;
-const ONE_GWEI = 1_000_000_000n;
+module.exports = buildModule("Lock", (m) => {
+  const lock = m.contract("ATokenETH", []); // Pass constructor arguments if needed
 
-module.exports = buildModule("LockModule", (m) => {
-  const unlockTime = m.getParameter("unlockTime", JAN_1ST_2030);
-  const lockedAmount = m.getParameter("lockedAmount", ONE_GWEI);
-
-  const lock = m.contract("Lock", [unlockTime], {
-    value: lockedAmount,
-  });
+  // Deploy the contract
+  // m.call(apollo, "launch", []);
 
   return { lock };
 });

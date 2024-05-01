@@ -1,15 +1,16 @@
 require("@nomicfoundation/hardhat-toolbox");
 require("@nomicfoundation/hardhat-ethers");
 require("@nomicfoundation/hardhat-verify");
+require("@nomicfoundation/hardhat-ignition");
 const dotenv = require("dotenv");
 
 dotenv.config();
 
 /** @type import('hardhat/config').HardhatUserConfig */
 module.exports = {
-  solidity: "0.8.9",
+  solidity: "0.8.24",
   networks:{
-    mumbai: {
+    polygonAmoy: {
       url: process.env.POLYGON_MUMBAI,
       accounts: [process.env.PRIVATE_KEY],
     }
