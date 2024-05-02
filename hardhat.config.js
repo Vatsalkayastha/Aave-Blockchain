@@ -13,13 +13,27 @@ module.exports = {
     polygonAmoy: {
       url: process.env.POLYGON_MUMBAI,
       accounts: [process.env.PRIVATE_KEY],
+      chainId: 80002,
     }
   },
   etherscan: {
     // Your API key for Etherscan
     // Obtain one at https://etherscan.io/
-    apiKey: process.env.API_KEY,
+    apiKey: {
+      polygonAmoy : process.env.API_KEY,
+    },
+    customChains: [
+      {
+        network: "polygonAmoy",
+        chainId: 80002,
+        urls: {
+          apiURL: "https://api-amoy.polygonscan.com/api",
+          browserURL: "https://amoy.polygonscan.com/"
+        }
+      }
+    ]
   },
+  
   sourcify: {
     // Disabled by default
     // Doesn't need an API key

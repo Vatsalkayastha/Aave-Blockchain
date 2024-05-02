@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.24;
 
-import "./ATokenETH.sol";
-
+import "./ERC20.sol";
+import "hardhat/console.sol";
 contract LendingPool {
     mapping(address => uint256) public balances;
     // mapping(address => uint256) public borrowedAmounts;
@@ -24,8 +24,8 @@ contract LendingPool {
     event BalanceAfterDeposit(address account, uint256 balance);
     event BalanceAfterWithdrawal(address account, uint256 balance);
     // Deposit funds into the lending pool and mint tokens
-    function depositETH(uint256 _ethAmount) external payable {
-        
+    function depositETH() external payable {
+        uint256 _ethAmount = msg.value;
         require(_ethAmount > 0, "Amount must be greater than 0");
 
         token.mintTokens(msg.sender,  _ethAmount); // Mint tokens directly to the user
@@ -49,9 +49,12 @@ contract LendingPool {
     
 // }
 
-    function withdraw(uint256 _amount) external payable {
+    function withdraw(uint256 _amount) external payable{
+        
+        console.log(balances[msg.sender]);
         require(balances[msg.sender] >= _amount, "Insufficient balance");
         token.burnTokens(msg.sender,  _amount);
+        payable(msg.sender).transfer(_amount);
         balances[msg.sender] -= _amount;
         totalDeposits -= _amount;
         
