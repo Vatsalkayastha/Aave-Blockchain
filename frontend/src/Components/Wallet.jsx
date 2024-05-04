@@ -1,13 +1,9 @@
-
 import { useEffect, useState } from "react";
 import { ethers } from "ethers";
-
-
 
 function Wallet() {
   let signer;
   let provider;
-;
 
   const [addr, setAddr] = useState(""); //destination addr
   const [amount, setAmount] = useState("");
@@ -20,156 +16,78 @@ function Wallet() {
   const connect = async () => {
     try {
       provider = new ethers.providers.Web3Provider(window.ethereum);
-      // MetaMask requires requesting permission to connect users accounts
       await provider.send("eth_requestAccounts", []);
-      // console.log(provider);
       signer = provider.getSigner();
-      // console.log(signer);
       setSignerAddr(signer);
 
       const accAddr = await signer.getAddress();
       setAccountAddr(accAddr);
       setConnected(true);
       await checkbalance(signer);
-      // await sendTransaction("0.02");
     } catch (error) {
       console.log(error);
     }
   };
-
-//   const tokenContract = new ethers.Contract(
-//     link_tokenAddress,
-//     linktoken_abi.result,
-//     signer
-//   );
 
   const checkbalance = async (signer) => {
     const balance = await signer.getBalance();
     setBalance(balance);
   };
 
-//   const sendTokensToContract = async (e, tokenAmount) => {
-//     e.preventDefault();
-//     try {
-//       const amountToSend = ethers.utils.parseUnits(tokenAmount.toString(), 18); // Convert token amount to Wei
-//       const tokenContractWithSigner = tokenContract.connect(signerAddr);
-//       const tx = await tokenContractWithSigner.transfer(
-//         contractAddress,
-//         amountToSend
-//       );
-//       await tx.wait();
-//       setTxStatus("completed");
-//       console.log("Tokens sent to contract successfully");
-//     } catch (error) {
-//       console.error("Sending tokens to contract failed:", error);
-//     }
-//   };
-
-//   const getStatus = (txStatus) => {
-//     switch (txStatus) {
-//       case "initialized":
-//         return "Pending";
-//       case "completed":
-//         return "Successfull";
-//       default:
-//         return "Not initialized";
-//         break;
-//     }
-//   };
-
-//   useEffect(() => {
-//     console.log("Balance: ", ethers.utils.formatEther(balance));
-//     // console.log(accountAddr);
-//     // console.log(txStatus);
-//   }, [balance]);
-
   return (
-    <div className="flex h-[100vh] w-full">
-      <div>
-        <div className="text-center">
-          <button
-            className="text-right"
-            onClick={(e) => {
-              connect(e);
-            }}
-          >
-            {connected ? "Connected" : "Connect to Metamask"}
-          </button>
-        </div>
-
-        <div className="text-center mb-4">
-          <div className="mb-3">
-            <label htmlFor="accountAddr" className="form-label">
-              Connected Account
-            </label>
-            <input
-              id="accountAddr"
-              type="text"
-              value={accountAddr}
-              aria-label="Account address"
-              disabled
-              readOnly
-            />
-          </div>
+    <div>
+      <nav className="bg-gray-200 p-4">
+        <div className="flex justify-between">
           <div>
-            <button>
+            <h1 className="text-4xl font-bold" >Aave</h1>
+          </div>
+
+          <div>
+            <button className="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded">
               Balance: {ethers.utils.formatUnits(balance, 18)}
             </button>
           </div>
+          <div>
+            <p className="text-gray-800 font-bold py-2 px-1">{accountAddr}</p>
+          </div>
+          <div>
+            <button
+              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+              onClick={(e) => {
+                connect(e);
+              }}
+            >
+              {connected ? "Connected" : "Connect to Metamask"}
+            </button>
+          </div>
         </div>
+      </nav>
 
-        {/* <div className="text-center border rounded p-4">
-          <form>
+      {/* <div className="flex h-[100vh] w-full">
+        <div className="m-auto">
+          <div className="text-center mb-4">
             <div className="mb-3">
-              <label htmlFor="exampleInputEmail1" className="form-label">
-                Destination Address
+              <label htmlFor="accountAddr" className="form-label">
+                Connected Account
               </label>
               <input
+                id="accountAddr"
                 type="text"
-                className="form-control"
-                id="exampleInputEmail1"
-                aria-describedby="emailHelp"
-                value={addr}
-                onChange={(e) => setAddr(e.target.value)}
+                value={accountAddr}
+                aria-label="Account address"
+                disabled
+                readOnly
+                className="border border-gray-300 rounded p-2"
               />
             </div>
-            <div className="mb-3">
-              <label htmlFor="exampleInputPassword1" className="form-label">
-                Amount
-              </label>
-              <input
-                type="text"
-                className="form-control"
-                id="exampleInputPassword1"
-                value={amount}
-                onChange={(e) => setAmount(e.target.value)}
-              />
+            <div>
+              <button className="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded">
+                Balance: {ethers.utils.formatUnits(balance, 18)}
+              </button>
             </div>
-          </form>
-          <Button
-            type="submit"
-            className="btn btn-danger mb-3"
-            variant="contained"
-            color="error"
-            onClick={(e) => {
-              sendTokensToContract(e, amount);
-              setAddr("");
-              setAmount("");
-              setTxStatus("initialized");
-            }}
-          >
-            Transact
-          </Button>
-          <div id="liveAlertPlaceholder"></div>
-          <button
-            type="button"
-            className="btn btn-primary mb-3"
-            id="liveAlertBtn"
-          >
-            status: {getStatus(txStatus)}
-          </button>
-        </div> */}
-      </div>
+          </div>
+        </div>
+      </div> */}
     </div>
   );
 }
