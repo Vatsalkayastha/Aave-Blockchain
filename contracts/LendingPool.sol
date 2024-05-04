@@ -30,8 +30,10 @@ contract LendingPool {
     mapping(address => uint256) public matic_withdrawInterest;
     mapping(address => uint256) public borrowable_amount;
 
-    AToken public token; // Token contract address
+    AToken public matic_token; // Token contract address
+    AToken public ibt_token; // Token contract address
     ERC20 public mytoken_address;
+    ERC20 public matic_address;
 
     event Deposit(address indexed user, uint256 amount, uint256 tokensMinted);
     event Withdraw(address indexed user, uint256 amount);
@@ -40,8 +42,10 @@ contract LendingPool {
 
 
     constructor() {
-        token = new AToken();
+        // matic_token = new AToken();
+        // ibt_token = new AToken();
         mytoken_address = ERC20(0xA7385B18BD0609551bE8BC4be1aF38D54C6c1720);
+        matic_address = ERC20(0x7D1AfA7B718fb893dB30A3aBc0Cfc608AaCfeBB0);
     }
 
     event BalanceAfterDeposit(address account, uint256 balance);
@@ -53,7 +57,7 @@ contract LendingPool {
         MTC_price = 0.72 * (10 ** 18);
         require(_maticAmount > 0, "Amount must be greater than 0");
 
-        token.mintTokenswithMTC(msg.sender, _maticAmount); // Mint tokens directly to the user
+        matic_token.mintTokenswithMTC(msg.sender, _maticAmount); // Mint tokens directly to the user
         matic_balances[msg.sender] += _maticAmount;
 
         borrowable_amount[msg.sender] =
@@ -89,7 +93,7 @@ contract LendingPool {
             "Transfer failed"
         );
 
-        token.mintTokensWithUSD(msg.sender, _ibtAmount); // Mint tokens directly to the user
+        ibt_token.mintTokensWithUSD(msg.sender, _ibtAmount); // Mint tokens directly to the user
         ibt_balances[msg.sender] += _ibtAmount;
         ibt_totalDeposits += _ibtAmount;
         if (ibt_balances[msg.sender] == _ibtAmount) {
@@ -148,7 +152,7 @@ contract LendingPool {
         }
 
         ibt_deposit_timestamp[msg.sender] = time_now;
-        token.burnTokensWithUSD(msg.sender, _amount);
+        ibt_token.burnTokensWithUSD(msg.sender, _amount);
         ibt_balances[msg.sender] -= _amount;
         ibt_totalDeposits -= _amount;
         console.log("Balances Left :");
@@ -191,7 +195,7 @@ contract LendingPool {
         }
 
         matic_deposit_timestamp[msg.sender] = time_now;
-        token.burnTokenswithMTC(msg.sender, _amount);
+        matic_token.burnTokenswithMTC(msg.sender, _amount);
         matic_balances[msg.sender] -= _amount;
         borrowable_amount[msg.sender] =
             (matic_balances[msg.sender] * (MTC_price) * 7) /
