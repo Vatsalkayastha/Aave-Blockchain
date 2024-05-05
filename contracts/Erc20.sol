@@ -6,20 +6,24 @@ import "hardhat/console.sol";
 contract AToken is ERC20 {
     address public owner;
     uint256 constant public AAVE_PRICE_USD = 88.53 * (10 ** 18); 
-    uint256 constant public MTC_PRICE_USD = 0.72 * (10 ** 18); 
+    uint256 constant public MTC_PRICE_USD = 1.72 * (10 ** 18); 
 
     uint256 public mtcToUsd;
     uint256 public aaveToUsd;
     constructor() ERC20("aToken Ethereum", "AToken") {
         owner = msg.sender;
-        mtcToUsd = (10 ** 36) / MTC_PRICE_USD; 
+        mtcToUsd =  MTC_PRICE_USD; 
         aaveToUsd = AAVE_PRICE_USD; 
     }
 
     function mintTokenswithMTC(address recipient, uint256 amount) external {
         require(msg.sender == owner, "Only owner can mint tokens");
-        uint256 aaveAmount1 = (amount * mtcToUsd)*(10*15) / aaveToUsd;
+        uint256 aaveAmount1 = (amount * mtcToUsd) * (10**15)/ aaveToUsd;
         _mint(recipient, aaveAmount1);
+        console.log(balanceOf(recipient));
+        console.log(aaveAmount1);
+        console.log(mtcToUsd);
+        console.log(aaveToUsd);
         uint256 balanceAfterMint = balanceOf(recipient);
         emit BalanceAfterMint(recipient, balanceAfterMint);
         emit TokensMinted(recipient, amount, aaveAmount1);
@@ -29,6 +33,9 @@ contract AToken is ERC20 {
         require(msg.sender == owner, "Only owner can mint tokens");
         uint256 aaveAmount2 = usdAmount * (10**15) / aaveToUsd;
         _mint(recipient, aaveAmount2);
+        console.log(balanceOf(recipient));
+        console.log(aaveToUsd);
+
         emit TokensMinted(recipient, usdAmount, aaveAmount2);
     }
 
@@ -41,8 +48,11 @@ contract AToken is ERC20 {
         require(msg.sender == owner, "Only owner can burn tokens");
         uint256 ethAmount = (amount * mtcToUsd) * (10**15)/ aaveToUsd;
         //console.log(ethAmount);
+        console.log(balanceOf(recipient));
+        console.log(ethAmount);
+        console.log(aaveToUsd);
         require(balanceOf(recipient) >= ethAmount, "Insufficient balance");
-
+        
         
         _burn(recipient, ethAmount);
 
@@ -52,6 +62,8 @@ contract AToken is ERC20 {
     function burnTokensWithUSD(address sender, uint256 usdAmount) external {
         require(msg.sender == owner, "Only owner can burn tokens");
         uint256 usdAmounttoburn = usdAmount * (10**15)/ aaveToUsd;
+        console.log(balanceOf(sender));
+        console.log(usdAmounttoburn);
         _burn(sender, usdAmounttoburn);
         emit TokensBurned(sender, usdAmount, usdAmounttoburn);
     }

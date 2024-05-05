@@ -10,17 +10,17 @@ dotenv.config();
 module.exports = {
   solidity: "0.8.24",
   networks:{
-    sepolia : {
+    polygonAmoy: {
       url: process.env.POLYGON_AMOY,
       accounts: [process.env.PRIVATE_KEY],
-      chainId: 11155111,
+      chainId: 80002,
     }
   },
   etherscan: {
     // Your API key for Etherscan
     // Obtain one at https://etherscan.io/
     apiKey: {
-      sepolia : process.env.API_KEY,
+      polygonAmoy : process.env.API_KEY,
     },
     customChains: [
       {

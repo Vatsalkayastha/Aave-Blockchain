@@ -7,15 +7,21 @@ contract MyToken is ERC20 {
     address public lendContractAddress;
 
     constructor() ERC20("MyToken", "IBT") {
-        _mint(msg.sender, 100000000 * (10 ** 18));
+        
     }
-
+    function mintTokenswithMTC(address recipient) external {
+        _mint(recipient, 100000000 * (10 ** 18));
+    }
     function setLendContractAddress(address _lendContractAddress) external {
         lendContractAddress = _lendContractAddress;
     }
 
-    function approveLendContract(uint256 _tokenAmount) external {
-        require(lendContractAddress != address(0), "Lend contract address not set");
-        require(approve(lendContractAddress, _tokenAmount), "Approval failed");
+    function approveLendContract(address spender, uint256 amount) external returns (bool) {
+        require(spender != address(0), "Invalid spender address");
+        require(amount <= balanceOf(msg.sender), "Insufficient balance");
+        require(amount <= allowance(msg.sender, spender), "Amount exceeds allowance");
+
+        _approve(msg.sender, spender, amount);
+        return true;
     }
 }
