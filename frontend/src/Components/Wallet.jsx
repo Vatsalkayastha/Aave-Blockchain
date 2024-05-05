@@ -36,15 +36,15 @@ function Wallet() {
 
   return (
     <div>
-      <nav className="bg-gray-200 p-4">
+      <nav className="bg-gray-200 p-4 border-b-2 border-black">
         <div className="flex justify-between">
           <div>
             <h1 className="text-4xl font-bold" >Aave</h1>
-          </div>
+          </div>  
 
           <div>
-            <button className="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded">
-              Balance: {ethers.utils.formatUnits(balance, 18)}
+            <button className="bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded">
+              Balance: {ethers.utils.formatUnits(balance, 18)} Eth
             </button>
           </div>
           <div>
