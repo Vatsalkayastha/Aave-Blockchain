@@ -11,7 +11,7 @@ module.exports = {
   solidity: "0.8.24",
   networks:{
     polygonAmoy: {
-      url: process.env.POLYGON_MUMBAI,
+      url: process.env.POLYGON_AMOY,
       accounts: [process.env.PRIVATE_KEY],
       chainId: 80002,
     }
@@ -37,6 +37,6 @@ module.exports = {
   sourcify: {
     // Disabled by default
     // Doesn't need an API key
-    enabled: true
+    enabled: false
   }
 };
