@@ -13,7 +13,7 @@ const WithdrawPageEth = () => {
       <div className="w-[40%] bg-slate-100 rounded-lg border-[2px] border-slate-300">
         <div className="flex justify-between">
           <div className="flex pl-12 text-[20px] font-semibold my-3 text-left">
-            Supply ETH
+            Withdraw ETH
           </div>
           <div className="text-right my-3 pr-9">
             <button onClick={handleCloseClick}>
@@ -34,19 +34,16 @@ const WithdrawPageEth = () => {
           Transaction Overview
         </div>
         <div className="flex pl-12 my-2">
-          <div className="grid grid-cols-2 gap-3">
-            <div className="flex text-left">Supply APY</div>
-            <div className="flex text-right ml-44">0 %</div>
-          </div>
-        </div>
-        <div className="flex pl-12 my-2">
-          <div className="grid grid-cols-2 gap-3">
-            <div className="flex text-left">Collateralization</div>
-            <div className="flex text-right ml-40 text-green-600">Enabled</div>
+          <div className="grid grid-cols-2">
+            <div className="flex text-left">Remaining Supply</div>
+            <div className="flex text-right ml-24">0.00000000001 ETH</div>
           </div>
         </div>
         <div className="flex pl-12 pr-24 my-2 w-full">
-        <button className="flex px-7 py-2 rounded-lg text-center items-center justify-center border-2 border-slate-400 my-2 bg-slate-300 w-full">Supply </button></div>
+          <button className="flex px-7 py-2 rounded-lg text-center items-center justify-center border-2 border-slate-400 my-2 bg-slate-300 w-full">
+            Withdraw{" "}
+          </button>
+        </div>
       </div>
     </div>
   );

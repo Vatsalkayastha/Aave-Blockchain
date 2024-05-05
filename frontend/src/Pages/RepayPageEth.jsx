@@ -13,7 +13,7 @@ const RepayPageEth = () => {
       <div className="w-[40%] bg-slate-100 rounded-lg border-[2px] border-slate-300">
         <div className="flex justify-between">
           <div className="flex pl-12 text-[20px] font-semibold my-3 text-left">
-            Borrow ETH
+            Repay ETH
           </div>
           <div className="text-right my-3 pr-9">
             <button onClick={handleCloseClick}>
@@ -35,13 +35,16 @@ const RepayPageEth = () => {
         </div>
         <div className="flex pl-12 my-2">
           <div className="grid grid-cols-2 gap-3">
-            <div className="flex text-left">Available</div>
-            <div className="flex text-right ml-28">0.00000032 Max</div>
+            <div className="flex text-left">Remaining Debt</div>
+            <div className="flex text-right ml-24">0.00000032 ETH</div>
           </div>
         </div>
-        
+
         <div className="flex pl-12 pr-24 my-2 w-full">
-        <button className="flex px-7 py-2 rounded-lg text-center items-center justify-center border-2 border-slate-400 my-2 bg-slate-300 w-full">Borrow </button></div>
+          <button className="flex px-7 py-2 rounded-lg text-center items-center justify-center border-2 border-slate-400 my-2 bg-slate-300 w-full">
+            Repay{" "}
+          </button>
+        </div>
       </div>
     </div>
   );

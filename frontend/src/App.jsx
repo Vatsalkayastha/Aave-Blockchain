@@ -5,7 +5,6 @@ import Borrow from "./Components/Borrow";
 import WithDraw from "./Components/WithDraw";
 import Repay from "./Components/Repay";
 
-
 function App() {
   let signer;
   let provider;
@@ -44,8 +43,8 @@ function App() {
       <nav className="bg-gray-200 p-4 border-b-2 border-black">
         <div className="flex justify-between">
           <div>
-            <h1 className="text-4xl font-bold" >Aave</h1>
-          </div>  
+            <h1 className="text-4xl font-bold">Aave</h1>
+          </div>
 
           <div>
             <button className="bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded">
@@ -68,24 +67,21 @@ function App() {
         </div>
       </nav>
       <div className="grid grid-cols-2 gap-16 my-8 mx-2 py-3 px-3">
-      <div >
-         <Supply />
-        </div>  
+        <div>
+          <Supply />
+        </div>
         <div>
           <Borrow />
-        </div> 
+        </div>
       </div>
       <div className="grid grid-cols-2 gap-16 my-8 mx-2 py-3 px-3">
-      <div >
-         <WithDraw />
-        </div>  
+        <div>
+          <WithDraw />
+        </div>
         <div>
           <Repay />
-        </div> 
+        </div>
       </div>
-       
-           
-      
     </div>
   );
 }

@@ -39,9 +39,12 @@ const BorrowPageEth = () => {
             <div className="flex text-right ml-28">0.00000032 Max</div>
           </div>
         </div>
-        
+
         <div className="flex pl-12 pr-24 my-2 w-full">
-        <button className="flex px-7 py-2 rounded-lg text-center items-center justify-center border-2 border-slate-400 my-2 bg-slate-300 w-full">Borrow </button></div>
+          <button className="flex px-7 py-2 rounded-lg text-center items-center justify-center border-2 border-slate-400 my-2 bg-slate-300 w-full">
+            Borrow{" "}
+          </button>
+        </div>
       </div>
     </div>
   );

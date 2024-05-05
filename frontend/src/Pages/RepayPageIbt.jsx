@@ -2,7 +2,7 @@ import React from "react";
 import { IoMdClose } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
 
-const BorrowPageIBT = () => {
+const RepayPageIBT = () => {
   const navigate = useNavigate(); // Initialize useNavigate
 
   const handleCloseClick = () => {
@@ -13,7 +13,7 @@ const BorrowPageIBT = () => {
       <div className="w-[40%] bg-slate-100 rounded-lg border-[2px] border-slate-300">
         <div className="flex justify-between">
           <div className="flex pl-12 text-[20px] font-semibold my-3 text-left">
-            Borrow IBT
+            Repay IBT
           </div>
           <div className="text-right my-3 pr-9">
             <button onClick={handleCloseClick}>
@@ -35,16 +35,19 @@ const BorrowPageIBT = () => {
         </div>
         <div className="flex pl-12 my-2">
           <div className="grid grid-cols-2 gap-3">
-            <div className="flex text-left">Available</div>
-            <div className="flex text-right ml-28">0.000001 Max</div>
+            <div className="flex text-left">Remaining Debt</div>
+            <div className="flex text-right ml-28">0.000001 IBT</div>
           </div>
         </div>
-        
+
         <div className="flex pl-12 pr-24 my-2 w-full">
-        <button className="flex px-7 py-2 rounded-lg text-center items-center justify-center border-2 border-slate-400 my-2 bg-slate-300 w-full">Borrow </button></div>
+          <button className="flex px-7 py-2 rounded-lg text-center items-center justify-center border-2 border-slate-400 my-2 bg-slate-300 w-full">
+            Repay{" "}
+          </button>
+        </div>
       </div>
     </div>
   );
 };
 
-export default BorrowPageIBT;
+export default RepayPageIBT;

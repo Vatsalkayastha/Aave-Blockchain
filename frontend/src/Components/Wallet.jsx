@@ -39,8 +39,8 @@ function Wallet() {
       <nav className="bg-gray-200 p-4 border-b-2 border-black">
         <div className="flex justify-between">
           <div>
-            <h1 className="text-4xl font-bold" >Aave</h1>
-          </div>  
+            <h1 className="text-4xl font-bold">Aave</h1>
+          </div>
 
           <div>
             <button className="bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded">
